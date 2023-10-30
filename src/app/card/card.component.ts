@@ -13,9 +13,12 @@ export class CardComponent {
   constructor(private apiService: ApiService) {}
 
   addToWishlist() {
-    // add art to local storage
     this.apiService.addToWishlist(this.art);
   }
-
+  viewDetails() {
+    localStorage.setItem('currentArt', JSON.stringify(this.art));
+    this.apiService.viewDetails(this.art);
+  }
+  
 
 }

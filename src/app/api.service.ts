@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
-import { Observable, map } from 'rxjs';
+import { BehaviorSubject, Observable, map } from 'rxjs';
+import { Router } from '@angular/router';
 export interface Post {
   id: number;
   title: string;
@@ -17,13 +18,18 @@ export interface Post {
 }
 
 const WISHLIST_KEY = 'my-wishlist';
+const  DETAIL_KEY = 'my-detail';
 @Injectable({
   providedIn: 'root',
 })
 export class ApiService {
   apiUrl = 'https://api.artic.edu/api/v1';
+  private largerImageSource = new BehaviorSubject<Post | undefined>(undefined);
+  largerImage$ = this.largerImageSource.asObservable();
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {
+    
+  }
 
   getTotalLength(): Observable<number> {
     return this.http.get<any>(this.apiUrl + '/artworks').pipe(
@@ -45,7 +51,7 @@ export class ApiService {
 
   getPostById(page: number, pageSize: number, id: number): Observable<Post[]> {
     return this.http
-      .get<any>(`${this.apiUrl}/artworks/${id}?page=${page}&limit=${pageSize}`)
+      .get<any>(`${this.apiUrl}/artworks/${id}`)
       .pipe(
         map((response) => {
           return response.data as Post[];
@@ -93,4 +99,15 @@ export class ApiService {
     console.log(wishlist);
     return wishlist;
   }
+
+  // viewDetails(id: number): Observable<Post> {
+  //   return this.http.get<Post>(`${this.apiUrl}/artworks/${id}`).pipe(
+  //     map((response) => response as Post)
+  //   );
+  // }
+
+  viewDetails(art: Post) :void{
+    localStorage.setItem('currentArt', JSON.stringify(art));
+  }
+
 }
