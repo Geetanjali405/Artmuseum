@@ -1,0 +1,10 @@
+<div class="card" style="width: 20rem;">
+        <img class="card-img-top" src="https://www.artic.edu/iiif/2/{{art?.image_id}}/full/843,/0/default.jpg" [alt]="art?.thumbnail?.alt_text">
+
+        <div class="card-body">
+                <h5 class="card-title">{{art?.title |slice:0:90}}</h5>
+          <p class="card-text">{{art?.artist_title |slice:0:200}}</p>
+          <button (click)="addToWishlist()" class="btn btn-primary">Add to wishlist</button>
+          
+        </div>
+</div>
