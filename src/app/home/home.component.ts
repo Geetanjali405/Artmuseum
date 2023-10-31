@@ -77,6 +77,21 @@ export class HomeComponent {
     console.log('inside search');
     let searchQuery =
       this.searchForm.controls['searchQuery'].value.toLowerCase();
+      if(searchQuery === ''){
+        this.apiService.getPosts(1, 12).subscribe(
+    
+          (data: Post[]) => {
+            this.posts = data;
+            this.pageEvent.length = this.posts.length;
+            this.pageEvent.pageSize = 12;
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+        return;
+      }
+      
     if (searchQuery.length > 2) {
       console.log("inside condition");
       this.posts = [];

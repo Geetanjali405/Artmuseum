@@ -1,0 +1,47 @@
+Introduction:
+
+The ArtMuseum is a web-based application designed to allow visitors to explore and search artwork from the museum's collection. This Angular-based web application uses Art Institute of Chicago's API to fetch data about the artworks and provides a user-friendly interface for browsing, searching, and viewing details about artworks. The application employs responsive design principles to make it look and work well on desktop and mobile devices.
+
+Features:
+
+Home Page:
+
+The home page welcomes the user with a brief introduction to the museum.
+The page includes a search bar and options for filtering artwork.
+
+Search Functionality:
+
+The application allows learners to search for artwork by keywords, artists, or other relevant criteria.
+The search results can be refined using search filters (e.g, by artist, medium, and time period).We used the search endpoints of api url for this:
+
+Artwork Listing:
+
+The application displays search results in a visually appealing grid format.
+The artwork list includes images and basic information such as title and artist.
+
+Artwork Details:
+
+Users can click on an view to view detailed information.
+A larger image of the artwork is displayed, and additional details such as the artist, date, description, and any related information available through the API are provided.
+
+Pagination:
+
+The application implements pagination for large result sets to ensure a smooth user experience using mat paginator from angular material.
+
+User Favorites/Wishlist:
+
+The application allows learners to mark artworks as favorites and save them for future reference. This feature is stored locally in the browser.
+
+Responsive Design:
+
+The application ensures a responsive design that looks good on both desktop and mobile devices.
+Error Handling:
+
+The application handles API request errors gracefully.
+
+API Integration:
+The application uses the Art Institute of Chicago's API to fetch data about artworks.
+
+Conclusion:
+
+The Art Institute of Chicago Artwork Explorer is a comprehensive and user-friendly web application designed to allow visitors to explore and search artwork from the museum's vast collection. The use of Art Institute of Chicago's API not only makes it easier to fetch data about artworks but also ensures that the information provided is accurate and up-to-date. The application adheres to best practices for Angular application structure and design and ensures a responsive design that looks good on both desktop and mobile devices. Error handling has been implemented to ensure a smooth user experience, and the code has been well documented for easy maintenance.
