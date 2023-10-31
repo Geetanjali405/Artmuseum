@@ -40,13 +40,12 @@
   <h3>ART WORKS</h3>
 </div>
  
-  <div class="mx-auto">
+
     <div class="col-lg-11">
       <div class="row">
         <app-card *ngFor="let id of artworkIds" [artwork_id]="id" class="col-lg-3 ms-5 me-5 mb-2"></app-card>
       </div>
     </div>
-  </div>
 
   <mat-paginator [pageSizeOptions]="[9, 12, 24, 98]" [pageSize]="pageSize" (page)="handlePageChange($event)"
     [pageIndex]="currentPageIndex" [length]="pageLength" showFirstLastButtons></mat-paginator>

@@ -32,6 +32,7 @@ export class ApiService {
   getTotalLength(): Observable<number> {
     return this.http.get<any>(this.apiUrl + '/artworks').pipe(
       map((response) => {
+        console.log(response);
         return response.pagination.total;
       })
     );
