@@ -1,15 +1,17 @@
-<div class="container" style="background-color: rgb(237,219,223);">
-        <h2>{{art?.title}}</h2>
-        <div class="single-product">
+<div style="background-color: rgb(237,219,223); min-width: 100vw; min-height: 100vh;">
+        <div class="container">
+                <h2>{{art?.title}}</h2>
+                <div class="single-product">
                 <div class="row">
                         <div class="col-6">
                                 <img class="card-img-top"
-                                        src="https://www.artic.edu/iiif/2/{{art?.image_id}}/full/843,/0/default.jpg"
-                                        [alt]="art?.thumbnail?.alt_text">
+                                src="https://www.artic.edu/iiif/2/{{art?.image_id}}/full/843,/0/default.jpg"
+                                [alt]="art?.thumbnail?.alt_text">
                         </div>
-                        <div class="col-6">
-                                {{art?.description ? art.description : 'Lorem ipsum dolor sit amet, consectetur
-                                adipiscing elit.'}}
+                        <div class="col-6" id="descriptionBox">
+                                <!-- {{art?.description ? art.description : 'Lorem ipsum dolor sit amet, consectetur
+                                        adipiscing elit.'}} -->
+                                </div>
                         </div>
                 </div>
         </div>

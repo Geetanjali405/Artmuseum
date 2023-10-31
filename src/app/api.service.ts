@@ -18,7 +18,7 @@ export interface Post {
 }
 
 const WISHLIST_KEY = 'my-wishlist';
-const  DETAIL_KEY = 'my-detail';
+const DETAIL_KEY = 'my-detail';
 @Injectable({
   providedIn: 'root',
 })
@@ -27,9 +27,7 @@ export class ApiService {
   private largerImageSource = new BehaviorSubject<Post | undefined>(undefined);
   largerImage$ = this.largerImageSource.asObservable();
 
-  constructor(private http: HttpClient, private router: Router) {
-    
-  }
+  constructor(private http: HttpClient, private router: Router) {}
 
   getTotalLength(): Observable<number> {
     return this.http.get<any>(this.apiUrl + '/artworks').pipe(
@@ -50,17 +48,14 @@ export class ApiService {
   }
 
   getPostById(page: number, pageSize: number, id: number): Observable<Post[]> {
-    return this.http
-      .get<any>(`${this.apiUrl}/artworks/${id}`)
-      .pipe(
-        map((response) => {
-          return response.data as Post[];
-        })
-      );
+    return this.http.get<any>(`${this.apiUrl}/artworks/${id}`).pipe(
+      map((response) => {
+        return response.data as Post[];
+      })
+    );
   }
 
   getSearch(page: number, pageSize: number, query: string): Observable<Post[]> {
-    // console.log(`${this.apiUrl}/artworks/search?q=${query}&page=${page}&limit=${pageSize}`);
     return this.http
       .get<any>(
         `${this.apiUrl}/artworks/search?q=${query}&page=${page}&limit=${pageSize}`
@@ -72,26 +67,27 @@ export class ApiService {
       );
   }
 
-  addToWishlist(art: Post) :void{
+  addToWishlist(art: Post): void {
     let wishlist: Post[] = [];
     if (localStorage.getItem(WISHLIST_KEY)) {
       wishlist = JSON.parse(localStorage.getItem(WISHLIST_KEY)!);
     }
-  
-    const artExistsInWishlist = wishlist.some(wishlistArt => wishlistArt.id === art.id);
+
+    const artExistsInWishlist = wishlist.some(
+      (wishlistArt) => wishlistArt.id === art.id
+    );
     if (artExistsInWishlist) {
-      alert("ART IS ALREADY ADDED TO WISHLIST! EXPLORE MORE!")
+      alert('ART IS ALREADY ADDED TO WISHLIST! EXPLORE MORE!');
     }
     if (!artExistsInWishlist) {
       wishlist.push(art);
-  
+
       localStorage.setItem(WISHLIST_KEY, JSON.stringify(wishlist));
-      alert("ART ADDED TO WISHLIST SUCCESSFULLY!!")
+      alert('ART ADDED TO WISHLIST SUCCESSFULLY!!');
     }
   }
 
   getWishlist(): Post[] {
-    // get wishlist from local storage
     let wishlist: Post[] = [];
     if (localStorage.getItem(WISHLIST_KEY)) {
       wishlist = JSON.parse(localStorage.getItem(WISHLIST_KEY)!);
@@ -99,15 +95,7 @@ export class ApiService {
     console.log(wishlist);
     return wishlist;
   }
-
-  // viewDetails(id: number): Observable<Post> {
-  //   return this.http.get<Post>(`${this.apiUrl}/artworks/${id}`).pipe(
-  //     map((response) => response as Post)
-  //   );
-  // }
-
-  viewDetails(art: Post) :void{
+  viewDetails(art: Post): void {
     localStorage.setItem('currentArt', JSON.stringify(art));
   }
-
 }

@@ -29,8 +29,8 @@ export class HomeComponent {
 
   ngOnInit() {
     this.apiService.getTotalLength().subscribe({
-      next: (totLenght) => {
-        this.pageLength = totLenght;
+      next: (totLength) => {
+        this.pageLength = totLength;
       },
     });
 
@@ -56,15 +56,12 @@ export class HomeComponent {
   }
 
   handlePageChange(event: PageEvent) {
-    // const pageSize = event.pageSize;
-    // const pageIndex = event.pageIndex;
     this.pageEvent = event;
     this.apiService
       .getPosts(this.pageEvent.pageIndex + 1, this.pageEvent.pageSize)
       .subscribe(
         (data: Post[]) => {
           this.posts = data;
-          // this.filteredPosts = this.posts;
         },
         (error) => {
           console.log(error);
@@ -104,12 +101,10 @@ export class HomeComponent {
         .subscribe(
           (data: Post[]) => {
             this.posts = data;
-            // this.filteredPosts = this.posts;
             console.log(this.posts)
           },
           (error) => {
             console.log(error);
-            // this.posts = [];
           }
         );
     }
@@ -120,6 +115,5 @@ export class HomeComponent {
     this.pageSize = pageSize;
     const startIndex = this.currentPageIndex * this.pageSize;
     const endIndex = startIndex + this.pageSize;
-    // this.filteredPosts = this.filteredPosts.slice(startIndex, endIndex);
   }
 }
