@@ -1,11 +1,10 @@
-import { Component,Input,Output,EventEmitter, Inject } from '@angular/core';
+import { Component, Input, Output, EventEmitter, Inject } from '@angular/core';
 import { ApiService, Post } from '../api.service';
-
 
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',
-  styleUrls: ['./card.component.scss']
+  styleUrls: ['./card.component.scss'],
 })
 export class CardComponent {
   @Input() art: Post | undefined;
@@ -19,6 +18,8 @@ export class CardComponent {
     localStorage.setItem('currentArt', JSON.stringify(this.art));
     this.apiService.viewDetails(this.art);
   }
-  
-
+  onCardImageClick(event: Event) {
+    event.preventDefault();
+    this.viewDetails();
+  }
 }
