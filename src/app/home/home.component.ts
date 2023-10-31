@@ -19,6 +19,8 @@ export class HomeComponent {
   currentPageIndex = 0;
   pageLength: number = 0;
 
+  artworkIds: number[] = [];
+
   pageEvent: PageEvent = {
     length : 0,
     pageIndex: 0,
@@ -36,9 +38,9 @@ export class HomeComponent {
 
     this.apiService.getPosts(1, 12).subscribe(
     
-      (data: Post[]) => {
-        this.posts = data;
-        this.pageEvent.length = this.posts.length;
+      (data: number[]) => {
+        this.artworkIds = data;
+        this.pageEvent.length = this.artworkIds.length;
         this.pageEvent.pageSize = 12;
       },
       (error) => {
@@ -55,13 +57,12 @@ export class HomeComponent {
     });
   }
 
-  handlePageChange(event: PageEvent) {
-    this.pageEvent = event;
+  handlePagination() {
     this.apiService
       .getPosts(this.pageEvent.pageIndex + 1, this.pageEvent.pageSize)
       .subscribe(
-        (data: Post[]) => {
-          this.posts = data;
+        (data: number[]) => {
+          this.artworkIds = data;
         },
         (error) => {
           console.log(error);
@@ -70,27 +71,20 @@ export class HomeComponent {
       );
   }
 
+  handlePageChange(event: PageEvent) {
+    this.pageEvent = event;
+    this.handlePagination();
+  }
+
   filterPosts() {
     console.log('inside search');
-    let searchQuery =
-      this.searchForm.controls['searchQuery'].value.toLowerCase();
+    let searchQuery = this.searchForm.controls['searchQuery'].value.toLowerCase();
       if(searchQuery === ''){
-        this.apiService.getPosts(1, 12).subscribe(
-    
-          (data: Post[]) => {
-            this.posts = data;
-            this.pageEvent.length = this.posts.length;
-            this.pageEvent.pageSize = 12;
-          },
-          (error) => {
-            console.log(error);
-          }
-        );
+        this.handlePagination();
         return;
       }
       
     if (searchQuery.length > 2) {
-      console.log("inside condition");
       this.posts = [];
       this.apiService
         .getSearch(
@@ -99,9 +93,9 @@ export class HomeComponent {
           searchQuery
         )
         .subscribe(
-          (data: Post[]) => {
-            this.posts = data;
-            console.log(this.posts)
+          (data: number[]) => {
+            this.artworkIds = data;
+            console.log(this.artworkIds)
           },
           (error) => {
             console.log(error);
@@ -110,6 +104,8 @@ export class HomeComponent {
     }
     this.paginatePosts(this.currentPageIndex, this.pageSize);
   }
+
+
   paginatePosts(currentPageIndex: number, pageSize: number) {
     this.currentPageIndex = currentPageIndex;
     this.pageSize = pageSize;

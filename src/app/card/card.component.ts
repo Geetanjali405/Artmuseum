@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, Inject } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ApiService, Post } from '../api.service';
 
 @Component({
@@ -6,10 +6,20 @@ import { ApiService, Post } from '../api.service';
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.scss'],
 })
-export class CardComponent {
-  @Input() art: Post | undefined;
+export class CardComponent implements OnInit {
+  art: Post | undefined;
+  @Input() artwork_id: number;
 
   constructor(private apiService: ApiService) {}
+
+  ngOnInit(): void {
+    this.apiService.getPostById(this.artwork_id).subscribe({
+      next: (artwork) => {
+        this.art = artwork;
+      },
+      error: (er) => { console.error(er); }
+    });
+  }
 
   addToWishlist() {
     this.apiService.addToWishlist(this.art);

@@ -37,32 +37,38 @@ export class ApiService {
     );
   }
 
-  getPosts(page: number, pageSize: number): Observable<Post[]> {
+  getPosts(page: number, pageSize: number): Observable<number[]> {
     return this.http
       .get<any>(`${this.apiUrl}/artworks?page=${page}&limit=${pageSize}`)
       .pipe(
         map((response) => {
-          return response.data as Post[];
+          const ids: number[] = [];
+          response.data.forEach(art => ids.push(art.id));
+          return ids;
         })
       );
   }
 
-  getPostById(page: number, pageSize: number, id: number): Observable<Post[]> {
+  getPostById(id: number): Observable<Post> {
     return this.http.get<any>(`${this.apiUrl}/artworks/${id}`).pipe(
       map((response) => {
-        return response.data as Post[];
+        return response.data as Post;
       })
     );
   }
 
-  getSearch(page: number, pageSize: number, query: string): Observable<Post[]> {
+  getSearch(page: number, pageSize: number, query: string): Observable<number[]> {
     return this.http
       .get<any>(
         `${this.apiUrl}/artworks/search?q=${query}&page=${page}&limit=${pageSize}`
       )
       .pipe(
         map((response) => {
-          return response.data as Post[];
+          const ids: number[] = [];
+          response.data.forEach(art => {
+            ids.push(art.id);
+          })
+          return ids;
         })
       );
   }
