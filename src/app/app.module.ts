@@ -12,6 +12,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { WishlistComponent } from './wishlist/wishlist.component';
 import { HomeComponent } from './home/home.component';
 import { DescriptionComponent } from './description/description.component';
+import { SpinnerComponent } from './spinner/spinner.component';
 // import { NumberStorageTranscoder } from 'ngx-webstorage-service';
 
 
@@ -21,7 +22,8 @@ import { DescriptionComponent } from './description/description.component';
     CardComponent,
     WishlistComponent,
     HomeComponent,
-    DescriptionComponent
+    DescriptionComponent,
+    SpinnerComponent
   ],
   imports: [
     BrowserModule,
