@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable, map } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, map, of } from 'rxjs';
 import { Router } from '@angular/router';
+import { PositionStrategy } from '@angular/cdk/overlay';
 export interface Post {
   id: number;
   title: string;
@@ -20,17 +21,32 @@ export interface Post {
   classification_title: string;
 }
 
+export interface artworkResponse {
+  pagination: {
+    total: number;
+    limit: number;
+    offset: number;
+    total_pages: number;
+    current_page: number;
+    next_url: string;
+  };
+  data: Post[];
+  info: {};
+  config: {};
+}
+
 const WISHLIST_KEY = 'my-wishlist';
 const DETAIL_KEY = 'my-detail';
 @Injectable({
   providedIn: 'root',
 })
 export class ApiService {
+  fields =
+    'id,title,thumbnail,description,image_id,artist_title,medium_display,artwork_type_title,classification_title';
+  artwork: Post[];
   apiUrl = 'https://api.artic.edu/api/v1';
-  private largerImageSource = new BehaviorSubject<Post | undefined>(undefined);
-  largerImage$ = this.largerImageSource.asObservable();
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private route: Router) {}
 
   getTotalLength(): Observable<number> {
     return this.http.get<any>(this.apiUrl + '/artworks').pipe(
@@ -42,15 +58,22 @@ export class ApiService {
   }
 
   getPosts(page: number, pageSize: number): Observable<number[]> {
-    return this.http
-      .get<any>(`${this.apiUrl}/artworks?page=${page}&limit=${pageSize}`)
-      .pipe(
-        map((response) => {
-          const ids: number[] = [];
-          response.data.forEach(art => ids.push(art.id));
-          return ids;
-        })
-      );
+    // return this.http
+    //   .get<any>(`${this.apiUrl}/artworks?page=${page}&limit=${pageSize}`)
+    //   .pipe(
+    //     map((response) => {
+    //       const ids: number[] = [];
+    //       response.data.forEach(art => ids.push(art.id));
+    //       return ids;
+    //     })
+    //   );
+
+    const ids: number[] = [];
+    this.http.get<artworkResponse>(`${this.apiUrl}/artworks?page=${page}&limit=${pageSize}&fields=${this.fields}`).subscribe(
+      (response: artworkResponse) => {
+        response.data.forEach((art) => ids.push(art.id));
+      });
+      return of(ids);
   }
 
   getPostById(id: number): Observable<Post> {
@@ -61,7 +84,11 @@ export class ApiService {
     );
   }
 
-  getSearch(page: number, pageSize: number, query: string): Observable<number[]> {
+  getSearch(
+    page: number,
+    pageSize: number,
+    query: string
+  ): Observable<number[]> {
     return this.http
       .get<any>(
         `${this.apiUrl}/artworks/search?q=${query}&page=${page}&limit=${pageSize}`
@@ -69,9 +96,9 @@ export class ApiService {
       .pipe(
         map((response) => {
           const ids: number[] = [];
-          response.data.forEach(art => {
+          response.data.forEach((art) => {
             ids.push(art.id);
-          })
+          });
           return ids;
         })
       );
@@ -106,21 +133,21 @@ export class ApiService {
     return wishlist;
   }
 
-removeFromWishlist(art: Post) {
-  let wishlist: Post[] = [];
-  if (localStorage.getItem(WISHLIST_KEY)) {
-    wishlist = JSON.parse(localStorage.getItem(WISHLIST_KEY)!);
-  }
+  removeFromWishlist(art: Post) {
+    let wishlist: Post[] = [];
+    if (localStorage.getItem(WISHLIST_KEY)) {
+      wishlist = JSON.parse(localStorage.getItem(WISHLIST_KEY)!);
+    }
 
-  const index = wishlist.findIndex((item) => item.id === art.id);
+    const index = wishlist.findIndex((item) => item.id === art.id);
 
-  if (index !== -1) {
-    wishlist.splice(index, 1);
-    localStorage.setItem(WISHLIST_KEY, JSON.stringify(wishlist));
-    alert('ART REMOVED FROM WISHLIST SUCCESSFULLY!');
-  } else {
-    alert('ART IS NOT IN WISHLIST!');
+    if (index !== -1) {
+      wishlist.splice(index, 1);
+      localStorage.setItem(WISHLIST_KEY, JSON.stringify(wishlist));
+      alert('ART REMOVED FROM WISHLIST SUCCESSFULLY!');
+    } else {
+      alert('ART IS NOT IN WISHLIST!');
+    }
+    return wishlist;
   }
-  return wishlist;
-}
 }
