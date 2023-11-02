@@ -1,19 +1,25 @@
-<div class="mx-auto" style="background-color:rgb(223,213,178);">
-        <h3>WISHLIST</h3>
-        <h5 class="art">Add arts to wishlist.</h5>
-        <div class="col-lg-11">
-                <div class="row">
-                        <div *ngFor="let art of wishlist" class="card me-4 mb-4 ms-5" style="width: 20rem;">
-                                <img class="card-img-top"
-                                        [src]="'https://www.artic.edu/iiif/2/' + art.image_id + '/full/843,/0/default.jpg'"
-                                        [alt]="art.thumbnail?.alt_text">
+<div style="background-color:rgb(249,249,249); min-width: 100vw; min-height: 100vh;">
+        <div class="mx-auto">
+                <h3> YOUR FAVOURITES</h3>
+                <h5 class="art">Add arts to favourites.</h5>
+                <div class="col-lg-11">
+                        <div class="row">
+                                <div *ngFor="let art of wishlist" class="card me-4 mb-4 ms-5" style="width: 20rem;">
+                                        <img class="card-img-top"
+                                                [src]="'https://www.artic.edu/iiif/2/' + art.image_id + '/full/843,/0/default.jpg'"
+                                                [alt]="art.thumbnail?.alt_text">
 
-                                <div class="card-body">
-                                        <h5 class="card-title">{{ art.title | slice:0:90 }}</h5>
-                                        <p class="card-text">{{ art.artist_title | slice:0:200 }}</p>
+                                        <div class="card-body">
+                                                <h5 class="card-title">{{ art.title | slice:0:90 }}</h5>
+                                                <p class="card-text">{{ art.artist_title | slice:0:200 }}</p>
+                                                <button (click)="removeFromWishlist(art)" class="btn btn-danger">Remove
+                                                        From
+                                                        Wishlist</button>
+
+                                        </div>
                                 </div>
-                        </div>
 
+                        </div>
                 </div>
         </div>
 </div>

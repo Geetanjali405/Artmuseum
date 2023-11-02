@@ -9,8 +9,12 @@
                                                 [alt]="art?.thumbnail?.alt_text">
                                 </div>
                                 <div class="col-6">
-                                        <p class="about"><b>Know the art:</b> {{art?.title}}</p>
-                                        <p class="about"><b>Know the artist:</b> {{art?.artist_title}}</p>
+                                        <p class="about"><b>Know the art: </b> {{art?.title}}</p>
+                                        <p class="about"><b>Know the artist: </b> {{art?.artist_title}}</p>
+                                        <p class="about"><b>Artwork type: </b> {{art?.artwork_type_title}}</p>
+                                        <p class="about"><b>This artwork is classified as </b>{{art?.classification_title}}
+                                        </p>
+
                                         <div class="about" id="descriptionBox">
                                                 <!-- {{art?.description ? art.description : 'Lorem ipsum dolor sit amet, consectetur
                                                 adipiscing elit.'}} -->

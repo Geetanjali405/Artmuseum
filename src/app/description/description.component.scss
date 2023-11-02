@@ -1,11 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Agbalumo&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Agbalumo&family=Lugrasimo&display=swap');
-.name{
+
+.name {
         font-family: 'Agbalumo', sans-serif;
-        margin-left: 35px;
+        margin-left: 15px;
         font-size: 2em;
         font-weight: bold;
 }
+
 .about {
         font-family: 'Lugrasimo', sans-serif;
-      }
+}
+
+.card-img-top{
+        border-radius: 8px;
+}

@@ -16,6 +16,8 @@ export interface Post {
   image_id: string;
   artist_title: string;
   medium_display: string;
+  artwork_type_title: string;
+  classification_title: string;
 }
 
 const WISHLIST_KEY = 'my-wishlist';
@@ -106,4 +108,24 @@ export class ApiService {
   viewDetails(art: Post): void {
     localStorage.setItem('currentArt', JSON.stringify(art));
   }
+
+removeFromWishlist(art: Post) {
+  let wishlist: Post[] = [];
+  if (localStorage.getItem(WISHLIST_KEY)) {
+    wishlist = JSON.parse(localStorage.getItem(WISHLIST_KEY)!);
+  }
+
+  // Find the index of the art to remove
+  const index = wishlist.findIndex((item) => item.id === art.id);
+
+  // If the art is in the wishlist, remove it and update localStorage wishlist
+  if (index !== -1) {
+    wishlist.splice(index, 1);
+    localStorage.setItem(WISHLIST_KEY, JSON.stringify(wishlist));
+    alert('ART REMOVED FROM WISHLIST SUCCESSFULLY!');
+  } else {
+    alert('ART IS NOT IN WISHLIST!');
+  }
+  return wishlist;
+}
 }
