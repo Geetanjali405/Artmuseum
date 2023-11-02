@@ -5,7 +5,8 @@
 
         <img *ngIf="!isLoading" class="card-img-top"
                 [src]="'https://www.artic.edu/iiif/2/' + art?.image_id + '/full/843,/0/default.jpg'"
-                alt="Image not available for this particular art , sorry for inconvenience caused" (click)="onCardImageClick($event)">
+                alt="Image not available for this particular art , sorry for inconvenience caused {{art?.thumbnail?.alt_text}}"
+                (click)="onCardImageClick($event)">
 
 
         <div *ngIf="!isLoading" class="card-body">
