@@ -21,3 +21,16 @@ h3 {
         font-size: 1em;
         font-weight: bold; 
 }
+.card:hover {
+        transform: scale(1.025);
+      }
+      
+      .card:hover .backgroundEffect {
+        bottom: 0;
+        height: 320px;
+        width: 100%;
+        position: absolute;
+        z-index: -1;
+        animation: popBackground 0.3s ease-in
+      }
+      

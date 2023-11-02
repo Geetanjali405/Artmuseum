@@ -15,6 +15,7 @@ export interface Post {
   description: string;
   image_id: string;
   artist_title: string;
+  medium_display: string;
 }
 
 const WISHLIST_KEY = 'my-wishlist';

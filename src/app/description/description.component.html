@@ -2,17 +2,22 @@
         <div class="container">
                 <h2 class="name">{{art?.title}}</h2>
                 <div class="single-product">
-                <div class="row">
-                        <div class="col-6">
-                                <img class="card-img-top"
-                                src="https://www.artic.edu/iiif/2/{{art?.image_id}}/full/843,/0/default.jpg"
-                                [alt]="art?.thumbnail?.alt_text">
-                        </div>
-                        <div class="col-6" id="descriptionBox">
-                                <!-- {{art?.description ? art.description : 'Lorem ipsum dolor sit amet, consectetur
-                                        adipiscing elit.'}} -->
+                        <div class="row">
+                                <div class="col-6">
+                                        <img class="card-img-top"
+                                                src="https://www.artic.edu/iiif/2/{{art?.image_id}}/full/843,/0/default.jpg"
+                                                [alt]="art?.thumbnail?.alt_text">
                                 </div>
+                                <div class="col-6">
+                                        <p class="about"><b>Know the art:</b> {{art?.title}}</p>
+                                        <p class="about"><b>Know the artist:</b> {{art?.artist_title}}</p>
+                                        <div class="about" id="descriptionBox">
+                                                <!-- {{art?.description ? art.description : 'Lorem ipsum dolor sit amet, consectetur
+                                                adipiscing elit.'}} -->
+                                        </div>
+
+                                </div>
+
                         </div>
                 </div>
         </div>
-</div>
