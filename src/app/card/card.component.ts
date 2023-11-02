@@ -26,11 +26,12 @@ export class CardComponent implements OnInit {
   addToWishlist(): void {
     this.apiService.addToWishlist(this.art);
   }
+  
   viewDetails(): void {
     this.router.navigate(['/description', this.art?.id]);
   }
+
   onCardImageClick(event: Event): void {
-    event.preventDefault();
-    this.viewDetails();
+    this.router.navigate(['/description', this.art?.id]);
   }
 }

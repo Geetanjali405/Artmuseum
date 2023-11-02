@@ -6,7 +6,7 @@
                 <h5 class="card-title">{{art?.title |slice:0:90}}</h5>
                 <p class="card-text">{{art?.artist_title |slice:0:200}}</p>
                 <button type="button" (click)="addToWishlist()" class="btn btn-primary btn-rounded">Add to
-                        wishlist</button>
+                        Favourites</button>
                 <button  [routerLink]="['/description', art?.id]" class="btn btn-warning ms-3">View Art</button>
         </div>
 </div>
