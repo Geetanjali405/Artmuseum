@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ApiService, Post } from '../api.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-card',
@@ -9,7 +10,7 @@ import { ApiService, Post } from '../api.service';
 export class CardComponent implements OnInit {
   art: Post | undefined;
   @Input() artwork_id: number;
-  constructor(private apiService: ApiService) {}
+  constructor(private apiService: ApiService, private router: Router) {}
 
   ngOnInit(): void {
     this.apiService.getPostById(this.artwork_id).subscribe({
@@ -26,8 +27,7 @@ export class CardComponent implements OnInit {
     this.apiService.addToWishlist(this.art);
   }
   viewDetails(): void {
-    localStorage.setItem('currentArt', JSON.stringify(this.art));
-    this.apiService.viewDetails(this.art);
+    this.router.navigate(['/description', this.art?.id]);
   }
   onCardImageClick(event: Event): void {
     event.preventDefault();

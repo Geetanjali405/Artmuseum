@@ -7,7 +7,7 @@ import { DescriptionComponent } from './description/description.component';
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'wishlist', component: WishlistComponent },
-  { path: 'description', component: DescriptionComponent },
+  { path: 'description/:id', component: DescriptionComponent },
 ];
 
 @NgModule({

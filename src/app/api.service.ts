@@ -105,9 +105,6 @@ export class ApiService {
     console.log(wishlist);
     return wishlist;
   }
-  viewDetails(art: Post): void {
-    localStorage.setItem('currentArt', JSON.stringify(art));
-  }
 
 removeFromWishlist(art: Post) {
   let wishlist: Post[] = [];
@@ -115,10 +112,8 @@ removeFromWishlist(art: Post) {
     wishlist = JSON.parse(localStorage.getItem(WISHLIST_KEY)!);
   }
 
-  // Find the index of the art to remove
   const index = wishlist.findIndex((item) => item.id === art.id);
 
-  // If the art is in the wishlist, remove it and update localStorage wishlist
   if (index !== -1) {
     wishlist.splice(index, 1);
     localStorage.setItem(WISHLIST_KEY, JSON.stringify(wishlist));
