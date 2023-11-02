@@ -23,22 +23,25 @@ export class HomeComponent implements OnInit{
     previousPageIndex: 0,
     pageSize: this.pageLength
   };
+  isLoading: boolean = false;
 
   constructor(private apiService: ApiService, private fb: FormBuilder) {}
 
   ngOnInit(): void {
+    // this.isLoading = true;
     this.apiService.getTotalLength().subscribe({
       next: (totLength) => {
         this.pageLength = totLength;
+        // this.isLoading = false;
       },
     });
 
     this.apiService.getPosts(1, 12).subscribe(
-     
     (data: number[]) => {
         this.artworkIds = data;
         this.pageEvent.length = this.artworkIds.length;
         this.pageEvent.pageSize = 12;
+        // this.isLoading = false;
       },
       (error) => {
         console.log(error);

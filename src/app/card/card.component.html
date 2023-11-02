@@ -2,8 +2,12 @@
         <div *ngIf="isLoading" class="d-flex justify-content-center p-4">
                 <mat-spinner [diameter]="50"></mat-spinner>
         </div>
-        <img *ngIf="!isLoading" class="card-img-top"
-                src="https://www.artic.edu/iiif/2/{{art?.image_id}}/full/843,/0/default.jpg"
+
+        <img *ngIf="!isLoading && art?.image_id" class="card-img-top"
+                [src]="'https://www.artic.edu/iiif/2/' + art?.image_id + '/full/843,/0/default.jpg'"
+                [alt]="art?.thumbnail?.alt_text" (click)="onCardImageClick($event)">
+
+        <img *ngIf="!isLoading && !art?.image_id" class="card-img-top" src="placeholder.jpg"
                 [alt]="art?.thumbnail?.alt_text" (click)="onCardImageClick($event)">
 
         <div *ngIf="!isLoading" class="card-body">

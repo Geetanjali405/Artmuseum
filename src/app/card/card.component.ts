@@ -30,7 +30,7 @@ export class CardComponent implements OnInit {
   addToWishlist(): void {
     this.apiService.addToWishlist(this.art);
   }
-  
+
   viewDetails(): void {
     this.router.navigate(['/description', this.art?.id]);
   }
@@ -38,4 +38,5 @@ export class CardComponent implements OnInit {
   onCardImageClick(event: Event): void {
     this.router.navigate(['/description', this.art?.id]);
   }
+
 }

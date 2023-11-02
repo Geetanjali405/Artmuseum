@@ -59,16 +59,6 @@ export class ApiService {
   }
 
   getPosts(page: number, pageSize: number): Observable<number[]> {
-    // return this.http
-    //   .get<any>(`${this.apiUrl}/artworks?page=${page}&limit=${pageSize}`)
-    //   .pipe(
-    //     map((response) => {
-    //       const ids: number[] = [];
-    //       response.data.forEach(art => ids.push(art.id));
-    //       return ids;
-    //     })
-    //   );
-
     const ids: number[] = [];
     this.http.get<artworkResponse>(`${this.apiUrl}/artworks?page=${page}&limit=${pageSize}&fields=${this.fields}`).subscribe(
       (response: artworkResponse) => {
