@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ApiService, Post } from '../api.service';
 import { Router } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-card',
@@ -9,8 +10,9 @@ import { Router } from '@angular/router';
 })
 export class CardComponent implements OnInit {
   art: Post | undefined;
+  
   @Input() artwork_id: number;
-  @Input() isLoading: boolean;
+ isLoading: boolean;
   constructor(private apiService: ApiService, private router: Router) {}
 
   ngOnInit(): void {
@@ -19,11 +21,7 @@ export class CardComponent implements OnInit {
       next: (artwork) => {
         this.art = artwork;
         this.isLoading = false;
-      },
-      error: (er) => {
-        console.error(er);
-        this.isLoading = false;
-      },
+      }
     });
   }
 
@@ -38,5 +36,4 @@ export class CardComponent implements OnInit {
   onCardImageClick(event: Event): void {
     this.router.navigate(['/description', this.art?.id]);
   }
-
 }

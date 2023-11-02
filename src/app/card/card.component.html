@@ -3,12 +3,10 @@
                 <mat-spinner [diameter]="50"></mat-spinner>
         </div>
 
-        <img *ngIf="!isLoading && art?.image_id" class="card-img-top"
+        <img *ngIf="!isLoading" class="card-img-top"
                 [src]="'https://www.artic.edu/iiif/2/' + art?.image_id + '/full/843,/0/default.jpg'"
-                [alt]="art?.thumbnail?.alt_text" (click)="onCardImageClick($event)">
+                alt="Image not available for this particular art , sorry for inconvenience caused" (click)="onCardImageClick($event)">
 
-        <img *ngIf="!isLoading && !art?.image_id" class="card-img-top" src="placeholder.jpg"
-                [alt]="art?.thumbnail?.alt_text" (click)="onCardImageClick($event)">
 
         <div *ngIf="!isLoading" class="card-body">
                 <h5 class="card-title">{{art?.title |slice:0:90}}</h5>

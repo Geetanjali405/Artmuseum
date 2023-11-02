@@ -42,6 +42,7 @@
 
   <div class="col-lg-12 d-flex justify-content-center">
     <div class="row d-flex justify-content-center flex-wrap w-100">
+      <mat-spinner *ngIf="isLoading"></mat-spinner>
       <app-card *ngFor="let id of artworkIds" [artwork_id]="id"
         class="d-flex justify-content-center col-lg-3 ms-5 me-5 mb-2"></app-card>
     </div>
