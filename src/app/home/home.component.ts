@@ -81,7 +81,7 @@ export class HomeComponent implements OnInit{
         return;
       }
       
-    if (searchQuery.length > 2) {
+    if (searchQuery.length > 0) {
       this.posts = [];
       this.apiService
         .getSearch(
