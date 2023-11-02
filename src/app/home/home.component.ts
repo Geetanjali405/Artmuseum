@@ -1,8 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ApiService,Post } from '../api.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
 import { PageEvent } from '@angular/material/paginator';
 
 @Component({
@@ -10,7 +8,7 @@ import { PageEvent } from '@angular/material/paginator';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit{
   posts: Post[] = [];
   filteredPosts: Post[] = [];
   searchForm: FormGroup;
@@ -18,18 +16,17 @@ export class HomeComponent {
   paginatedPosts: Post[];
   currentPageIndex = 0;
   pageLength: number = 0;
-
   artworkIds: number[] = [];
-
   pageEvent: PageEvent = {
     length : 0,
     pageIndex: 0,
     previousPageIndex: 0,
     pageSize: this.pageLength
   };
+
   constructor(private apiService: ApiService, private fb: FormBuilder) {}
 
-  ngOnInit() {
+  ngOnInit():void {
     this.apiService.getTotalLength().subscribe({
       next: (totLength) => {
         this.pageLength = totLength;
@@ -57,7 +54,7 @@ export class HomeComponent {
     });
   }
 
-  handlePagination() {
+  handlePagination():void {
     this.apiService
       .getPosts(this.pageEvent.pageIndex + 1, this.pageEvent.pageSize)
       .subscribe(
@@ -71,12 +68,12 @@ export class HomeComponent {
       );
   }
 
-  handlePageChange(event: PageEvent) {
+  handlePageChange(event: PageEvent):void {
     this.pageEvent = event;
     this.handlePagination();
   }
 
-  filterPosts() {
+  filterPosts():void {
     console.log('inside search');
     let searchQuery = this.searchForm.controls['searchQuery'].value.toLowerCase();
       if(searchQuery === ''){
@@ -106,7 +103,7 @@ export class HomeComponent {
   }
 
 
-  paginatePosts(currentPageIndex: number, pageSize: number) {
+  paginatePosts(currentPageIndex: number, pageSize: number):void {
     this.currentPageIndex = currentPageIndex;
     this.pageSize = pageSize;
     const startIndex = this.currentPageIndex * this.pageSize;

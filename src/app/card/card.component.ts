@@ -9,7 +9,6 @@ import { ApiService, Post } from '../api.service';
 export class CardComponent implements OnInit {
   art: Post | undefined;
   @Input() artwork_id: number;
-
   constructor(private apiService: ApiService) {}
 
   ngOnInit(): void {
@@ -17,18 +16,20 @@ export class CardComponent implements OnInit {
       next: (artwork) => {
         this.art = artwork;
       },
-      error: (er) => { console.error(er); }
+      error: (er) => {
+        console.error(er);
+      },
     });
   }
 
-  addToWishlist() {
+  addToWishlist(): void {
     this.apiService.addToWishlist(this.art);
   }
-  viewDetails() {
+  viewDetails(): void {
     localStorage.setItem('currentArt', JSON.stringify(this.art));
     this.apiService.viewDetails(this.art);
   }
-  onCardImageClick(event: Event) {
+  onCardImageClick(event: Event): void {
     event.preventDefault();
     this.viewDetails();
   }

@@ -12,7 +12,6 @@ export class DescriptionComponent implements OnInit {
   art: Post | undefined;
 
   constructor(private apiService: ApiService) {
-    // Retrieve the current art object from local storage
   }
   ngOnInit(): void {
     if (localStorage.getItem('currentArt')) {
@@ -20,6 +19,6 @@ export class DescriptionComponent implements OnInit {
       console.log(this.art);
     }
     document.getElementById('descriptionBox').innerHTML = this.art.description;
-    // throw new Error('Method not implemented.');
+   
   }
 }
