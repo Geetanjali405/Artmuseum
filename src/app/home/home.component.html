@@ -18,12 +18,11 @@
       <h1 class="logo"><a href="#"><i class="fa-solid fa fa-paint-brush"></i>Art Museum</a></h1>
       <div class="contain mt-3 mb-15">
         <div class="row justify-content-center">
-
-          <form [formGroup]="searchForm" class="d-flex">
-            <mat-form-field class="me-2">
-              <mat-label>Search art</mat-label>
-              <input matInput formControlName="searchQuery" id="searchQueryInput" />
-            </mat-form-field>
+          <i class="fa fa-search" aria-hidden="true"></i>
+          <form [formGroup]="searchForm" class="d-flex search-container">
+            <!-- <mat-form-field class="me-2"> -->
+              <input type="text" placeholder="Search" formControlName="searchQuery" id="searchQueryInput" class="search-input" />
+            <!-- </mat-form-field> -->
           </form>
 
         </div>
