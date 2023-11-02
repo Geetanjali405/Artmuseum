@@ -13,6 +13,7 @@ import { WishlistComponent } from './wishlist/wishlist.component';
 import { HomeComponent } from './home/home.component';
 import { DescriptionComponent } from './description/description.component';
 import { SpinnerComponent } from './spinner/spinner.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 // import { NumberStorageTranscoder } from 'ngx-webstorage-service';
 
 
@@ -33,7 +34,8 @@ import { SpinnerComponent } from './spinner/spinner.component';
     FormsModule,
     MatInputModule,
     BrowserAnimationsModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

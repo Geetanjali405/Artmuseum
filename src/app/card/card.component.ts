@@ -10,15 +10,19 @@ import { Router } from '@angular/router';
 export class CardComponent implements OnInit {
   art: Post | undefined;
   @Input() artwork_id: number;
+  @Input() isLoading: boolean;
   constructor(private apiService: ApiService, private router: Router) {}
 
   ngOnInit(): void {
+    this.isLoading = true;
     this.apiService.getPostById(this.artwork_id).subscribe({
       next: (artwork) => {
         this.art = artwork;
+        this.isLoading = false;
       },
       error: (er) => {
         console.error(er);
+        this.isLoading = false;
       },
     });
   }

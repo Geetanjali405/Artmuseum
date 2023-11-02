@@ -1,12 +1,16 @@
 <div class="card mb-4 ms-2" style="width: 20rem; background-color:rgb(242,242,242);">
-        <img class="card-img-top" src="https://www.artic.edu/iiif/2/{{art?.image_id}}/full/843,/0/default.jpg"
+        <div *ngIf="isLoading" class="d-flex justify-content-center p-4">
+                <mat-spinner [diameter]="50"></mat-spinner>
+        </div>
+        <img *ngIf="!isLoading" class="card-img-top"
+                src="https://www.artic.edu/iiif/2/{{art?.image_id}}/full/843,/0/default.jpg"
                 [alt]="art?.thumbnail?.alt_text" (click)="onCardImageClick($event)">
 
-        <div class="card-body">
+        <div *ngIf="!isLoading" class="card-body">
                 <h5 class="card-title">{{art?.title |slice:0:90}}</h5>
                 <p class="card-text">{{art?.artist_title |slice:0:200}}</p>
                 <button type="button" (click)="addToWishlist()" class="btn btn-primary btn-rounded">Add to
                         Favourites</button>
-                <button  [routerLink]="['/description', art?.id]" class="btn btn-warning ms-3">View Art</button>
+                <button [routerLink]="['/description', art?.id]" class="btn btn-warning ms-3">View Art</button>
         </div>
 </div>

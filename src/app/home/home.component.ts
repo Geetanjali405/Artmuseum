@@ -26,7 +26,7 @@ export class HomeComponent implements OnInit{
 
   constructor(private apiService: ApiService, private fb: FormBuilder) {}
 
-  ngOnInit():void {
+  ngOnInit(): void {
     this.apiService.getTotalLength().subscribe({
       next: (totLength) => {
         this.pageLength = totLength;
@@ -34,8 +34,8 @@ export class HomeComponent implements OnInit{
     });
 
     this.apiService.getPosts(1, 12).subscribe(
-    
-      (data: number[]) => {
+     
+    (data: number[]) => {
         this.artworkIds = data;
         this.pageEvent.length = this.artworkIds.length;
         this.pageEvent.pageSize = 12;
@@ -54,7 +54,7 @@ export class HomeComponent implements OnInit{
     });
   }
 
-  handlePagination():void {
+  handlePagination(): void {
     this.apiService
       .getPosts(this.pageEvent.pageIndex + 1, this.pageEvent.pageSize)
       .subscribe(
